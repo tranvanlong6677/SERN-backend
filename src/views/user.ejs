@@ -11,44 +11,51 @@
     />
   </head>
   <body>
-    <div class="user-info-container container mt-3">
-      <form>
-        <div class="row">
-          <div class="col-sm-12 col-lg-6 mb-3">
-            <label for="email" class="form-label"
-              >Email address</label
-            >
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              aria-describedby="emailHelp"
-            />
-          </div>
-          <div class="col-sm-12 col-lg-6"></div>
-          <div class="col-sm-12 col-lg-6 mb-3">
-            <label for="password" class="form-label"
-              >Password</label
-            >
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-            />
-          </div>
-          <div class="col-sm-12 col-lg-6"></div>
-          <div class="col-sm-12 col-lg-6 mb-3">
-            <label for="username" class="form-label">Username</label>
-            <input
-              type="text"
-              class="form-control"
-              id="username"
-            />
-          </div>
-          <div class="col-12">
-            <button type="submit" class="btn btn-primary">
-              Submit
-            </button>
+    <div class="user-info-container mt-3">
+      <form method="POST" action="/users/create-user">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-12 col-lg-6 mb-3">
+              <label for="email" class="form-label"
+                >Email address</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="col-sm-12 col-lg-6"></div>
+            <div class="col-sm-12 col-lg-6 mb-3">
+              <label for="password" class="form-label"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                required
+                name="password"
+              />
+            </div>
+            <div class="col-sm-12 col-lg-6"></div>
+            <div class="col-sm-12 col-lg-6 mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                required
+                name="username"
+              />
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">
+                Submit
+              </button>
+            </div>
           </div>
         </div>
         </div>

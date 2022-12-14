@@ -6,6 +6,7 @@ const initWebRoutes = (app) => {
   // router.get(path,handler)
   // path là đường link
   // handler là 1 function được thực thi khi router.get đến đường link chỉ định
+  router.post("/users/create-user", homeController.handleCreateNewUser);
   router.get("/user", homeController.handleUserPage);
   router.get("/", homeController.handleHelloWorld);
 
