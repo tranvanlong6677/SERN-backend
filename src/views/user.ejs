@@ -11,19 +11,20 @@
     />
   </head>
   <body>
-    <div class="user-info-container mt-3">
-      <form method="POST" action="/users/create-user">
-        <div class="container">
+    <div>
+      <% listUsers.forEach(function(item,index){ %>
+      <div class="abc"><%= JSON.stringify(item) %></div>
+      <% }) %>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="user-info-container mt-3">
           <div class="mb-3">
-            <h3>
-              Create a new user
-            </h3>
+            <h3>Create a new user</h3>
           </div>
-          <div class="row">
+          <form method="POST" action="/users/create-user">
             <div class="col-sm-12 col-lg-6 mb-3">
-              <label for="email" class="form-label"
-                >Email address</label
-              >
+              <label for="email" class="form-label">Email address</label>
               <input
                 type="email"
                 class="form-control"
@@ -34,9 +35,7 @@
             </div>
             <div class="col-sm-12 col-lg-6"></div>
             <div class="col-sm-12 col-lg-6 mb-3">
-              <label for="password" class="form-label"
-                >Password</label
-              >
+              <label for="password" class="form-label">Password</label>
               <input
                 type="password"
                 class="form-control"
@@ -57,14 +56,41 @@
               />
             </div>
             <div class="col-12">
-              <button type="submit" class="btn btn-primary">
-                Submit
-              </button>
+              <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-          </div>
+          </form>
         </div>
+
+        <div class="table-users mt-3">
+          <h3>Table Users</h3>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% listUsers.forEach(function(item,index){ %>
+              <!-- <div class="abc"><%= JSON.stringify(item) %></div> -->
+
+              <tr>
+                <th scope="row"><%= (index+1) %></th>
+                <td><%= (item.username) %></td>
+                <td><%= (item.email) %></td>
+                <td>
+                  <button class="btn btn-primary">Edit</button>
+                  <button class="btn btn-danger">Delete</button>
+                </td>
+              </tr>
+
+              <% }) %>
+            </tbody>
+          </table>
         </div>
-      </form>
+      </div>
     </div>
 
     <!-- Latest compiled JavaScript -->
