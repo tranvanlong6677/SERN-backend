@@ -11,11 +11,6 @@
     />
   </head>
   <body>
-    <div>
-      <% listUsers.forEach(function(item,index){ %>
-      <div class="abc"><%= JSON.stringify(item) %></div>
-      <% }) %>
-    </div>
     <div class="container">
       <div class="row">
         <div class="user-info-container mt-3">
@@ -77,12 +72,18 @@
               <!-- <div class="abc"><%= JSON.stringify(item) %></div> -->
 
               <tr>
-                <th scope="row"><%= (index+1) %></th>
+                <th scope="row"><%= (item.id) %></th>
                 <td><%= (item.username) %></td>
                 <td><%= (item.email) %></td>
                 <td>
                   <button class="btn btn-primary">Edit</button>
-                  <button class="btn btn-danger">Delete</button>
+                  <form
+                    action="/delete-user/<%= item.id %>"
+                    method="POST"
+                    style="display: inline"
+                  >
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                  </form>
                 </td>
               </tr>
 
