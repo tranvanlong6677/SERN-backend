@@ -37,12 +37,16 @@ const getUpdateUserPage = async (req, res) => {
 };
 
 const handleUpdateUser = async (req, res) => {
-  let userUpdate = await userService.getUserById(req.params.id);
-  let userData = {};
-  if (userUpdate && userUpdate.length > 0) {
-    userData = userUpdate[0];
-  }
-  await userService.updateUser(userData.id, req.body.username, req.body.email);
+  // let userUpdate = await userService.getUserById(req.params.id);
+  // let userData = {};
+  // if (userUpdate && userUpdate.length > 0) {
+  //   userData = userUpdate[0];
+  // }
+  await userService.updateUser(
+    req.params.id,
+    req.body.username,
+    req.body.email
+  );
 
   return res.redirect("/user");
 };
