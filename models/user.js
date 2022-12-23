@@ -8,6 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      User.belongsTo(models.Group);
+      User.belongsToMany(models.Project, { through: "Project_User" });
       // define association here
     }
   }

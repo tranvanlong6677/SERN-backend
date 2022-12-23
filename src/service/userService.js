@@ -33,20 +33,23 @@ const createNewUser = async (email, password, username) => {
 };
 
 const getUserList = async () => {
-  // create the connection, specify bluebird as Promise
-  // const connection = await mysql.createConnection({
-  //   host: "localhost",
-  //   user: "root",
-  //   database: "jwt",
-  //   Promise: bluebird,
-  // });
+  // test relationship
+  let newUser = await db.User.findOne({
+    where: { id: 2 },
+    raw: true,
+    include: { model: db.Group, attributes: ["id", "name", "description"] },
+    nest: true,
+    attributes: ["id", "username"],
+  });
+  console.log("check new user: >>>  ", newUser);
 
-  // try {
-  //   const [rows, fields] = await connection.execute("SELECT * FROM user");
-  //   return rows;
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  let roles = await db.Role.findAll({
+    raw: true,
+    nest: true,
+    include: { where: { id: 1 }, model: db.Group },
+  });
+
+  console.log("check roles>>>:", roles);
 
   let users = [];
   users = await db.User.findAll();

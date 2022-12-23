@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Project.belongsToMany(models.User, { through: "Project_User" });
       // define association here
     }
   }
