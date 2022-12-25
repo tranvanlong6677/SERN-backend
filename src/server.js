@@ -8,7 +8,21 @@ require("dotenv").config(); // dùng để chạy câu lệnh process.env
 
 const PORT = process.env.PORT || 8080;
 
+// this is a middleware
 const app = express();
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", process.env.REACT_URL);
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,POST,OPTIONS,PUT,PATCH,DELETE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-Type"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  next();
+});
 
 // config view engine
 configViewEngine(app);
