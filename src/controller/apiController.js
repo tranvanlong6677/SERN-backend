@@ -5,6 +5,12 @@ const testApi = (req, res) => {
   });
 };
 
+const handleRegister = (req, res) => {
+  console.log("check req body", req.body);
+  console.log(">>> check res", res);
+};
+
 module.exports = {
   testApi,
+  handleRegister,
 };

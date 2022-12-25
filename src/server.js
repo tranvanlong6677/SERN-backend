@@ -1,28 +1,17 @@
 import express from "express";
 import configViewEngine from "./config/viewEngine";
 import initWebRoutes from "./routes/web";
+import initApiRoutes from "./routes/api";
 import bodyParser from "body-parser";
 import connection from "../config/connectDB";
+import configCors from "./config/cors";
 
 require("dotenv").config(); // dùng để chạy câu lệnh process.env
-
+const app = express();
 const PORT = process.env.PORT || 8080;
 
-// this is a middleware
-const app = express();
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", process.env.REACT_URL);
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET,POST,OPTIONS,PUT,PATCH,DELETE"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-Type"
-  );
-  res.setHeader("Access-Control-Allow-Credentials", true);
-  next();
-});
+//config cors
+configCors(app);
 
 // config view engine
 configViewEngine(app);
@@ -36,6 +25,7 @@ connection();
 
 //init routes
 initWebRoutes(app);
+initApiRoutes(app);
 
 app.listen(PORT, () => {
   console.log("Server is running in " + PORT);
