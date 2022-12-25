@@ -1,5 +1,6 @@
 import express from "express";
 import homeController from "../controller/homeController";
+import apiController from "../controller/apiController";
 const router = express.Router();
 
 const initWebRoutes = (app) => {
@@ -12,6 +13,9 @@ const initWebRoutes = (app) => {
   router.post("/users/create-user", homeController.handleCreateNewUser);
   router.get("/user", homeController.handleUserPage);
   router.get("/", homeController.handleHelloWorld);
+
+  // rest API
+  router.get("/api/test-api", apiController.testApi);
 
   return app.use("/", router);
   // Ứng dụng bắt đầu với /
