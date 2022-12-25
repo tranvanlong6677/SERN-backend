@@ -40,7 +40,6 @@ const handleRegister = async (req, res) => {
       DT: "",
     });
   }
-  console.log("check req body", req.body);
 };
 
 module.exports = {
