@@ -84,7 +84,7 @@ const handleLogin = async (dataLogin) => {
         ],
       },
     });
-    console.log(">>> check user fineone:", user.get({ plain: true }));
+    console.log(">>> check user fineone:", user?.get({ plain: true }));
     if (user) {
       let isCorrectPassword = checkPassword(dataLogin.password, user.password);
       if (isCorrectPassword) {
