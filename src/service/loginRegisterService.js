@@ -100,20 +100,11 @@ const handleLogin = async (dataLogin) => {
       EC: "1",
       DT: "",
     };
-    // return user.get({ plain: true });
-    // if (!checkEmail) {
-    //   return {
-    //     EM: "Email or phone number is not exist",
-    //     EC: "1",
-    //     DT: "",
-    //   };
-    // }
   } catch (error) {
     console.log(error);
     return {
-      EM: "Error from server",
-      EC: "1",
-      DT: "",
+      EM: "Error from server ",
+      EC: "-2",
     };
   }
 };
