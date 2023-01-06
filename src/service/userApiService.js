@@ -35,6 +35,7 @@ const getAllUser = async () => {
 
 const createNewUser = async (data) => {
   try {
+    await db.User.create({});
   } catch (error) {
     console.log(error);
   }
