@@ -20,16 +20,6 @@ const createNewUser = async (email, password, username) => {
   } catch (error) {
     console.log(error);
   }
-
-  // connection.query(
-  //   "INSERT INTO user (email, password, username) VALUES (?,?,?)",
-  //   [email, hashPassword, username],
-  //   function (err, results, fields) {
-  //     if (err) {
-  //       console.log(err);
-  //     }
-  //   }
-  // );
 };
 
 const getUserList = async () => {
@@ -57,21 +47,6 @@ const getUserList = async () => {
 };
 
 const deleteUser = async (id) => {
-  // const connection = await mysql.createConnection({
-  //   host: "localhost",
-  //   user: "root",
-  //   database: "jwt",
-  //   Promise: bluebird,
-  // });
-  // try {
-  //   const [rows, fields] = await connection.execute(
-  //     "DELETE FROM user WHERE id=?",
-  //     [id]
-  //   );
-  //   return rows;
-  // } catch (error) {
-  //   console.log(error);
-  // }
   await db.User.destroy({
     where: {
       id: id,
@@ -79,21 +54,6 @@ const deleteUser = async (id) => {
   });
 };
 const getUserById = async (id) => {
-  // const connection = await mysql.createConnection({
-  //   host: "localhost",
-  //   user: "root",
-  //   database: "jwt",
-  //   Promise: bluebird,
-  // });
-  // try {
-  //   const [rows, fields] = await connection.execute(
-  //     "SELECT * FROM user WHERE id=?",
-  //     [id]
-  //   );
-  //   return rows;
-  // } catch (error) {
-  //   console.log(error);
-  // }
   let user = await db.User.findOne({
     where: {
       id: id,
@@ -103,22 +63,6 @@ const getUserById = async (id) => {
 };
 
 const updateUser = async (id, username, email) => {
-  // const connection = await mysql.createConnection({
-  //   host: "localhost",
-  //   user: "root",
-  //   database: "jwt",
-  //   Promise: bluebird,
-  // });
-  // try {
-  //   const [rows, fields] = await connection.execute(
-  //     "UPDATE user SET username = ?, email= ? WHERE id = ?",
-  //     [username, email, id]
-  //   );
-  //   return rows;
-  // } catch (error) {
-  //   console.log(error);
-  // }
-
   await db.User.update(
     { username: username, email: email },
     {
