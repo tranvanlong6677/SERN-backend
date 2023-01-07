@@ -46,7 +46,13 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   try {
-    let listUser = await userApiService.getAllUser();
+    console.log("check req.body", req.body);
+    let data = await userApiService.deleteUser(+req.body.id);
+    return res.status(200).json({
+      EM: data.EM,
+      EC: data.EC,
+      DT: data.DT,
+    });
   } catch (error) {
     console.log(error);
   }
