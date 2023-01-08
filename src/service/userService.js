@@ -39,8 +39,6 @@ const getUserList = async () => {
     include: { where: { id: 1 }, model: db.Group },
   });
 
-  console.log("check roles>>>:", roles);
-
   let users = [];
   users = await db.User.findAll();
   return users;
