@@ -39,6 +39,11 @@ const createUser = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
+    return res.status(500).json({
+      EM: data.EM,
+      EC: data.EC,
+      DT: data.DT,
+    });
   }
 };
 

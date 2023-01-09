@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
-import mysql from "mysql2/promise";
-import bluebird from "bluebird";
+// import mysql from "mysql2/promise";
+// import bluebird from "bluebird";
 import db from "../../models/index";
 
 const salt = bcrypt.genSaltSync(10);
@@ -31,7 +31,6 @@ const getUserList = async () => {
     nest: true,
     attributes: ["id", "username"],
   });
-  console.log("check new user: >>>  ", newUser);
 
   let roles = await db.Role.findAll({
     raw: true,

@@ -1,4 +1,27 @@
 import db from "../../models/index";
+import bcrypt from "bcryptjs";
+
+const salt = bcrypt.genSaltSync(10);
+
+const hashUserPassword = (password) => {
+  return bcrypt.hashSync(password, salt);
+};
+
+const checkEmailExist = async (email) => {
+  let userFind = await db.User.findOne({ where: { email: email } });
+  if (userFind) {
+    return true;
+  }
+  return false;
+};
+
+const checkPhoneExist = async (phone) => {
+  let userFind = await db.User.findOne({ where: { phone: phone } });
+  if (userFind) {
+    return true;
+  }
+  return false;
+};
 
 const getAllUser = async () => {
   try {
@@ -36,12 +59,15 @@ const getAllUser = async () => {
 const getUserListWithPaginate = async (page, limit) => {
   try {
     let offset = (page - 1) * limit;
-    console.log("check offset", offset);
     const { count, rows } = await db.User.findAndCountAll({
       offset,
       limit,
-      include: { model: db.Group, attributes: ["id", "name", "description"] },
-      attributes: ["id", "email", "username", "phone"],
+      include: {
+        model: db.Group,
+        attributes: ["id", "name", "description", "id"],
+      },
+      attributes: ["id", "email", "username", "phone", "address"],
+      order: [["id", "DESC"]],
     });
 
     let data = {
@@ -66,6 +92,27 @@ const getUserListWithPaginate = async (page, limit) => {
 
 const createNewUser = async (data) => {
   try {
+    //check data user
+    let checkEmail = await checkEmailExist(data.email);
+    let checkPhone = await checkPhoneExist(data.phone);
+    if (checkEmail) {
+      return {
+        EM: "Email is exist",
+        EC: "1",
+        DT: "email",
+      };
+    }
+    if (checkPhone) {
+      return {
+        EM: "Phone is exist",
+        EC: "1",
+        DT: "phone",
+      };
+    }
+    //hash user password
+    let hashPassword = hashUserPassword(data.password);
+    data.password = hashPassword;
+
     await db.User.create(data);
     return {
       EM: "create OK",
