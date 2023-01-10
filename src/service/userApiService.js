@@ -29,7 +29,7 @@ const getAllUser = async () => {
       raw: true,
       nest: true,
       include: { model: db.Group, attributes: ["id", "name", "description"] },
-      attributes: ["id", "email", "username", "phone"],
+      attributes: ["id", "email", "username", "phone", "sex"],
     });
     if (users) {
       console.log(">>> check users", users);
@@ -66,7 +66,7 @@ const getUserListWithPaginate = async (page, limit) => {
         model: db.Group,
         attributes: ["id", "name", "description", "id"],
       },
-      attributes: ["id", "email", "username", "phone", "address"],
+      attributes: ["id", "email", "username", "phone", "address", "sex"],
       order: [["id", "DESC"]],
     });
 
@@ -131,17 +131,47 @@ const createNewUser = async (data) => {
 
 const updateUser = async (data) => {
   try {
-    let userUpdate = db.User.findOne({
+    if (!data.groupId) {
+      return {
+        EM: "Error with empty groupId",
+        EC: 1,
+        DT: "groupId",
+      };
+    }
+    let userUpdate = await db.User.findOne({
       where: {
-        id: data.id,
+        id: +data.id,
       },
+      // raw: true,
+      // nest: true,
     });
+    console.log(">>> check data user update find", userUpdate);
     if (userUpdate) {
-      await db.User.update({});
+      await userUpdate.update({
+        username: data.username,
+        address: data.address,
+        sex: data.sex,
+        groupId: data.groupId,
+      });
+      return {
+        EM: "Update success",
+        EC: 0,
+        DT: [],
+      };
     } else {
+      return {
+        EM: "Not found this user in database",
+        EC: -1,
+        DT: [],
+      };
     }
   } catch (error) {
     console.log(error);
+    return {
+      EM: "Somethings wrongs with services",
+      EC: -1,
+      DT: [],
+    };
   }
 };
 
