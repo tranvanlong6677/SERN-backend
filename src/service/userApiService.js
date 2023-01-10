@@ -73,7 +73,7 @@ const getUserListWithPaginate = async (page, limit) => {
     let data = {
       totalRows: count, // tong so user
       totalPages: Math.ceil(count / limit), // tong so user chia cho so user 1 page roi lam tron len
-      users: rows,
+      users: rows, // du lieu users trong 1 pages
     };
     return {
       EM: "get user with paginate success",
